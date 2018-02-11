@@ -7,8 +7,15 @@ function sha256(buffer) {
 }
 
 function run() {
-  let input = 'abcde';
-  console.log(buildMerkleTree(input));
+  let input = 'abcd';
+  console.log(JSON.stringify(buildMerkleTree(input), null, 2));
+
+  console.log(
+    proof('2e7d2c03a9507ae265ecf5b5356885a53393a2029d241394997265a1a25aefc6', [
+      [true, '18ac3e7343f016890c510e93f935261169d9e3f565436429830faf0934f4f8e4'],
+      [false, '62af5c3cb8da3e4f25061e829ebeea5c7513c54949115b1acc225930a90154da'],
+    ])
+  );
 }
 
 run();
@@ -27,17 +34,26 @@ function createMerkleLeaves(chunks) {
   return nodes;
 }
 
-function createMerkleRoot(leaves) {
-  if (leaves.length === 1) return leaves[0];
+function createMerkleRoot(childNodes) {
+  if (childNodes.length === 1) return childNodes[0];
 
-  let newNodes = [];
-  for (let i = 0; i < leaves.length; i += 2) {
-    let left = leaves[i];
-    let right = leaves[i + 1];
+  let nodes = [];
+  for (let i = 0; i < childNodes.length; i += 2) {
+    let left = childNodes[i];
+    let right = childNodes[i + 1];
 
     let hash = sha256(left.key + (right ? right.key : ''));
-    newNodes.push({ key: hash, left, right });
+    nodes.push({ key: hash, left, right });
   }
 
-  return createMerkleRoot(newNodes);
+  return createMerkleRoot(nodes);
+}
+
+function proof(questionHash, validations) {
+  let root = questionHash;
+  for (let [onLeft, hash] of validations) {
+    if (onLeft) root = sha256(root + hash);
+    else root = sha256(hash + root);
+  }
+  return root;
 }
