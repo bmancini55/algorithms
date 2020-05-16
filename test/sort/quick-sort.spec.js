@@ -1,5 +1,5 @@
 const { runFixtures } = require("../test-utils");
-const { quickSort } = require("../../src/sor/quick-sort");
+const { quickSort } = require("../../src/sort/quick-sort");
 const { choosePivotLeft } = require("../../src/sort/quick-sort");
 const { choosePivotRight } = require("../../src/sort/quick-sort");
 const { choosePivotMedian } = require("../../src/sort/quick-sort");
