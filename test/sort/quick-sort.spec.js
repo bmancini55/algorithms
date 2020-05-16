@@ -1,8 +1,8 @@
-const { runFixtures } = require('./test-utils');
-const { quickSort } = require('../src/quick-sort');
-const { choosePivotLeft } = require('../src/quick-sort');
-const { choosePivotRight } = require('../src/quick-sort');
-const { choosePivotMedian } = require('../src/quick-sort');
+const { runFixtures } = require("../test-utils");
+const { quickSort } = require("../../src/sor/quick-sort");
+const { choosePivotLeft } = require("../../src/sort/quick-sort");
+const { choosePivotRight } = require("../../src/sort/quick-sort");
+const { choosePivotMedian } = require("../../src/sort/quick-sort");
 
 let fixtures = [
 	// example 1
@@ -23,6 +23,6 @@ let fixtures = [
 	['sorts 10 - median', 	[[6,4,1,9,8,3,10,2,7,5], choosePivotMedian], 	[[1,2,3,4,5,6,7,8,9,10],19]],
 ]; // prettier-ignore
 
-describe('quickSort', () => {
+describe("quickSort", () => {
 	runFixtures(quickSort, fixtures);
 });
