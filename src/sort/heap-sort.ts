@@ -31,22 +31,20 @@ export function extractMin(heap: number[]): number {
  * the best child. The best child is used to ensure that hte heap property
  * is maintained after the swap. When a swap is performed, a recursive call
  * is performed to bubble down the value.
- * @param arr
+ * @param heap
  * @param i
  */
-export function bubbleDown(arr: number[], i: number) {
+export function bubbleDown(heap: number[], i: number) {
 	const left = 2 * i + 1;
 	const right = 2 * i + 2;
 	let best = i;
 
-	if (arr[left] && arr[left] < arr[best]) best = left;
-	if (arr[right] && arr[right] < arr[best]) best = right;
+	if (heap[left] && heap[left] < heap[best]) best = left;
+	if (heap[right] && heap[right] < heap[best]) best = right;
 
 	if (best !== i) {
-		const t = arr[i];
-		arr[i] = arr[best];
-		arr[best] = t;
-		bubbleDown(arr, best);
+		swap(heap, i, best);
+		bubbleDown(heap, best);
 	}
 }
 
@@ -65,4 +63,10 @@ export function heapSort(arr: number[]) {
 		result[i] = extractMin(heap);
 	}
 	return result;
+}
+
+export function swap(arr: number[], i: number, j: number) {
+	const t = arr[i];
+	arr[i] = arr[j];
+	arr[j] = t;
 }

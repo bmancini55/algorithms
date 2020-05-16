@@ -20,10 +20,14 @@ export function selectionSort(arr: number[]) {
 		}
 
 		if (min !== i) {
-			const t = arr[i];
-			arr[i] = arr[min];
-			arr[min] = t;
+			swap(arr, i, min);
 		}
 	}
 	return arr;
+}
+
+export function swap(arr: number[], i: number, j: number) {
+	const t = arr[i];
+	arr[i] = arr[j];
+	arr[j] = t;
 }

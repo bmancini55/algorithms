@@ -14,12 +14,16 @@ export function bubbleSort(arr: number[]) {
 		lastSwap = -1;
 		for (let i = 0; i < n; i++) {
 			if (arr[i - 1] > arr[i]) {
-				const t = arr[i];
-				arr[i] = arr[i - 1];
-				arr[i - 1] = t;
+				swap(arr, i, i - 1);
 				lastSwap = i;
 			}
 		}
 	} while (lastSwap > -1);
 	return arr;
+}
+
+export function swap(arr: number[], i: number, j: number) {
+	const t = arr[i];
+	arr[i] = arr[j];
+	arr[j] = t;
 }
