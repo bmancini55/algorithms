@@ -4,6 +4,11 @@
  * uses a three step process where we first create a histogram of each
  * value. We then calculate the prefix sum (which acts as the start
  * index for the key).  We then create the output array.
+ *
+ * This variant includes general integer input array but accepts a
+ * target digit and radix to that operates on the values in the array.
+ * This variant can be used for radix sort where we successively iterate
+ * through the digits found in the expected input.
  * @param input input array of positive integers
  * @param digit the digit we are sorting by
  * @param radix the radix for the digit
