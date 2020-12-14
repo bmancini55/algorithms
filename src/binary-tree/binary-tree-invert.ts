@@ -10,6 +10,11 @@ export class BinaryTree<T> {
 	}
 }
 
+/**
+ * Recursively inverts a binary tree.  At each layer we swap the left
+ * and right nodes by calling invert.
+ * @param root
+ */
 export function invert<T>(root: BinaryTree<T>): BinaryTree<T> {
 	if (!root) return undefined;
 	const result = new BinaryTree(root.value);
