@@ -1,7 +1,7 @@
-import { del } from "../binary-tree/Recursive/Delete";
-import { insert } from "../binary-tree/Recursive/Insert";
-import { peekMax } from "../binary-tree/Recursive/PeekMax";
-import { peekMin } from "../binary-tree/Recursive/PeekMin";
+import { del } from "./Recursive/Delete";
+import { insert } from "./Recursive/Insert";
+import { peekMax } from "./Recursive/PeekMax";
+import { peekMin } from "./Recursive/PeekMin";
 
 export class Node<T> {
 	public key: T;

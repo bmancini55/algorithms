@@ -1,6 +1,6 @@
 import { expect } from "chai";
-import { insert } from "../../../src/binary-tree/Recursive/Insert";
-import { peekMax } from "../../../src/binary-tree/Recursive/PeekMax";
+import { insert } from "../../../src/BinarySearchTree/Recursive/Insert";
+import { peekMax } from "../../../src/BinarySearchTree/Recursive/PeekMax";
 
 describe("Binary Tree", () => {
 	describe("Recursive", () => {

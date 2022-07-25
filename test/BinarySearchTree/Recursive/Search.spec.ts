@@ -1,6 +1,6 @@
 import { expect } from "chai";
-import { insert } from "../../../src/binary-tree/Recursive/Insert";
-import { search } from "../../../src/binary-tree/Recursive/Search";
+import { insert } from "../../../src/BinarySearchTree/Recursive/Insert";
+import { search } from "../../../src/BinarySearchTree/Recursive/Search";
 
 describe("Binary Tree", () => {
 	describe("Recursive", () => {
