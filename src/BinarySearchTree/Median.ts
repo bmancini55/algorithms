@@ -1,8 +1,67 @@
-// @ts-check
+import { del } from "../binary-tree/Recursive/Delete";
+import { insert } from "../binary-tree/Recursive/Insert";
+import { peekMax } from "../binary-tree/Recursive/PeekMax";
+import { peekMin } from "../binary-tree/Recursive/PeekMin";
 
-const { Bst } = require('./bst');
+export class Node<T> {
+	public key: T;
+	public left: Node<T>;
+	public right: Node<T>;
+	public parent: Node<T>;
 
-class BstMedian {
+	constructor(key: T) {
+		this.key = key;
+		this.parent = null;
+		this.left = null;
+		this.right = null;
+	}
+}
+
+export class Bst<T> {
+	public root: Node<T>;
+	public size: number = 0;
+
+	public insert(key: T) {
+		this.root = insert(this.root, key);
+		this.size += 1;
+	}
+
+	public delete(key: T) {
+		this.root = del(this.root, key);
+		this.size -= 1;
+	}
+
+	public findMin(): T {
+		const node = peekMin(this.root);
+		return node?.key;
+	}
+
+	public findMax(): T {
+		const node = peekMax(this.root);
+		return node?.key;
+	}
+
+	public extractMin(): T {
+		const node = peekMin(this.root);
+		if (node) {
+			this.delete(node.key);
+		}
+		return node.key;
+	}
+
+	public extractMax() {
+		const node = peekMax(this.root);
+		if (node) {
+			this.delete(node.key);
+		}
+		return node.key;
+	}
+}
+
+export class BstMedian<T> {
+	public low: Bst<T>;
+	public high: Bst<T>;
+
 	constructor() {
 		this.low = new Bst();
 		this.high = new Bst();
@@ -10,9 +69,8 @@ class BstMedian {
 
 	/**
 	 * Gets the size
-	 * @type {number}
 	 */
-	get size() {
+	public get size() {
 		return this.low.size + this.high.size;
 	}
 
@@ -22,9 +80,8 @@ class BstMedian {
 	 * the lower-half of values.
 	 *
 	 * This has runtime of O(log n).
-	 * @param {number} val
 	 */
-	insert(val) {
+	public insert(val: T) {
 		median(this.low, this.high, val);
 	}
 
@@ -32,7 +89,7 @@ class BstMedian {
 	 * Finds the median value in constant runtime O(1).
 	 * @returns {number}
 	 */
-	findMedian() {
+	public findMedian(): T {
 		return this.low.findMax();
 	}
 }
@@ -40,7 +97,7 @@ class BstMedian {
 module.exports.BstMedian = BstMedian;
 
 /**
- * Function maintaines the median for a stream of numbers.
+ * Function maintains the median for a stream of numbers.
  * The median is maintained via two heaps that retain the
  * property that the size of the heaps are ~i/2. In particular
  * this heap maintains the invariant that the median is the
@@ -50,12 +107,8 @@ module.exports.BstMedian = BstMedian;
  * than the high heap.
  *
  * This function operates in runtime O(log n).
- *
- * @param {Bst} low heap with low values
- * @param {Bst} high heap with high values
- * @param {number} val value to insert
  */
-function median(low, high, val) {
+function median<T>(low: Bst<T>, high: Bst<T>, val: T) {
 	// insert into the low number heap if there are no values yet
 	// or if the current value is lower than the max value in
 	// the low number heap.
